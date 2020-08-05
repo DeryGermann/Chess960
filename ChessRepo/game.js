@@ -142,11 +142,11 @@ let generateStartingState = () => {
         // If this still does not work, recurssivly calls the method.
         if (backrow_state.length < 8) generateStartingState();
         // else console.log(`${backrow_state} :: ${backrow_state.length}`);
-        else checksBishopPosition(backrow_state);
+        else findBishopPosition(backrow_state);
     }
 }
 
-let checksBishopPosition = (placedPieces) => {
+let findBishopPosition = (placedPieces) => {
     /*
         The other Bishop can only be 
             1 square away,
@@ -156,14 +156,14 @@ let checksBishopPosition = (placedPieces) => {
     */
 
     let list = placedPieces.split("");
-    let firstBishopPosition;
+    let firstBishopPosition = "k";
     let secondBishopPostition;
 
     // Gets the position of the first bishop
     for (let index = 0; index < list.length; index++) {
         if (list[index] == 'b') {
             // Gets the position of the second bishop
-            if (firstBishopPosition == "") {
+            if (firstBishopPosition == "k") {
                 firstBishopPosition = index;
             } else {
                 secondBishopPostition = index;
@@ -171,8 +171,13 @@ let checksBishopPosition = (placedPieces) => {
         }
     }
 
-    console.log(placedPieces);
-    console.log(`${firstBishopPosition} :: ${secondBishopPostition}`);
+    // console.log(placedPieces);
+    // console.log(`${firstBishopPosition} :: ${secondBishopPostition}`);
+    moveBishopsIntoCorrectPositions(list, firstBishopPosition, secondBishopPostition);
+}
+
+let moveBishopsIntoCorrectPositions = (list, firstPos, secondPos) => {
+
 }
 // generateMenu();
 
@@ -183,7 +188,13 @@ let checksBishopPosition = (placedPieces) => {
 // }
 
 // UNIT TEST 2
-// Makes sure that the bishops are on different colored squares.
+// Finds the position of each Bishop
+// for (let i = 0; i < 10; i++) {
+//     generateStartingState();
+// }
+
+// UNIT TEST 3
+// Puts the Bishops into rule appropriate positions
 for (let i = 0; i < 10; i++) {
     generateStartingState();
 }
